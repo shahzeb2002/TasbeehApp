@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:tasbeeh_app/pages/sign_in_page.dart';
+import 'package:provider/provider.dart';
+import 'package:tasbeeh_app/pages/splash_page.dart';
+
+import 'controllers/tasbeeh_controller.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => TasbeehController(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,11 +19,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final tasbeeh = Provider.of<TasbeehController>(context);
     return MaterialApp(
-     debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: SignInPage(),
+
+      debugShowCheckedModeBanner: false,
+      theme: tasbeeh.isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      home: SplashPage(),
     );
   }
 }

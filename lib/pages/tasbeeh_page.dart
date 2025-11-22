@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
-class TasbeehPage extends StatefulWidget {
-  const TasbeehPage({super.key});
+import 'package:provider/provider.dart';
+import '../controllers/tasbeeh_controller.dart';
 
-  @override
-  State<TasbeehPage> createState() => _TasbeehPageState();
-}
-
-class _TasbeehPageState extends State<TasbeehPage> {
+class TasbeehPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final controller = Provider.of<TasbeehController>(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text("Tasbeeh Counter")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              controller.counter.toString(),
+              style: TextStyle(fontSize: 60),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: controller.increment,
+              child: Text("Increment"),
+            ),
+            ElevatedButton(
+              onPressed: controller.reset,
+              child: Text("Reset"),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
